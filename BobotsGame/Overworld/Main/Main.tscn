@@ -4,26 +4,32 @@
 [ext_resource path="res://Overworld/UnderworldEntrance/UnderworldEntrance.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Assets/Factory.png" type="Texture" id=3]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="YSort"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+build_mode = 1
+polygon = PoolVector2Array( -32, -16, -24, 40, 24, 56, 80, 56, 136, 40, 160, 16, 160, -32, 128, -40, 88, -40, 56, -24, 56, 0, 40, 8, 24, -8, 8, -24, -24, -24 )
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+z_index = -10
+color = Color( 0.505882, 0.72549, 0.341176, 1 )
+polygon = PoolVector2Array( -32, -16, -24, 40, 24, 56, 80, 56, 136, 40, 160, 16, 160, -32, 128, -40, 88, -40, 56, -24, 56, 0, 40, 8, 8, -24, -24, -24 )
 
 [node name="Origin" type="Polygon2D" parent="."]
 z_index = -1
 color = Color( 0.92549, 0.203922, 0.203922, 1 )
 polygon = PoolVector2Array( -1, -1, -1, 1, 1, 1, 1, -1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 
 [node name="UnderworldEntrance" parent="." instance=ExtResource( 2 )]
-position = Vector2( 98, -29 )
-entered_scene_path = "res://Underworld/Home/Home.tscn"
-sprite = ExtResource( 3 )
-
-[node name="UnderworldEntrance2" parent="." instance=ExtResource( 2 )]
-position = Vector2( -210, 37 )
-entered_scene_path = "res://Underworld/Home/Home.tscn"
-sprite = ExtResource( 3 )
-
-[node name="UnderworldEntrance3" parent="." instance=ExtResource( 2 )]
-position = Vector2( 7, 86 )
+position = Vector2( 112, -8 )
+_name = "The Litterbox"
 entered_scene_path = "res://Underworld/Home/Home.tscn"
 sprite = ExtResource( 3 )
