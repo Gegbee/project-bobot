@@ -16,10 +16,7 @@ var can_jump : bool = false
 
 var vel : Vector2 = Vector2()
 
-var npc_in_area : Area2D = null
-
 func _ready():
-	$NPCDetection.add_to_group("player_npc_area")
 	add_to_group('player')
 	
 func _physics_process(delta):
@@ -27,18 +24,31 @@ func _physics_process(delta):
 		Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left"),
 		Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	)
-	
-	npc_in_area = null
-	for area in $NPCDetection.get_overlapping_bodies():
-		if area.is_in_group("npc"):
-			npc_in_area = area
-	
-	if npc_in_area and Input.is_action_just_pressed("interact"):
-		npc_in_area.talk()
+
+	x_movement(delta, dir)
+
+#	MOVING
+#	if is_on_floor() or cat_jump:
+#		if dir.x:
+#			vel.x += dir.x * ACCEL * delta
+#			vel.x = clamp(vel.x, -SPEED, SPEED)
+#		else:
+#			vel.x = lerp(vel.x, 0, 0.4)
+#	else:
+#		vel.x = lerp(vel.x, 0, 0.02)
+#	SLIDING
+#
+#	if is_on_floor():
+#		if can_slide and Input.is_action_just_pressed("crouch"):
+#			vel.x += dir.x * ACCEL * delta * 8
+#		if can_slide and Input.is_action_pressed("crouch"):
+#			scale.y = 0.7
+#			vel.x = lerp(vel.x, 0, 0.02)
+#		else:
+#			scale.y = 1
 		
-	x_movement(delta, dir)	
 	#GRAVITY
-	if len($JumpDetection.get_overlapping_bodies()) >= 1:
+	if len($Area2D.get_overlapping_bodies()) >= 1:
 		can_jump = true
 	else:
 		can_jump = false
@@ -79,8 +89,3 @@ func x_movement(delta, dir):
 		else:
 			vel.x = lerp(vel.x, 0, 0.02)
 
-
-
-func _on_NPCDetection_area_entered(area):
-	if area.is_in_group("npc"):
-		npc_in_area = area

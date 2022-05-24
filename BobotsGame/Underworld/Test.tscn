@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PolygonCopier.gd" type="Script" id=1]
+
+[node name="Test" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( 8, 4 )
+script = ExtResource( 1 )
+polygon_copy = NodePath("../../Test/Polygon2D")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( -56, 0, -64, 0, -64, 8, 152, 8, 152, -52, 136.054, -52, 136, -60, 116, -60, 115.815, -52, 88, -52, 88, -84, 80, -84, 80, -44, 144, -44, 144, 0, 136, 0, 136, -16, 120, 0, 112, 0, 112, -8, 96, 0, 4, 0, 4, -12, 24, -12, 24, -48, 16, -48, 16, -20, -4, -20, -4, 0, -48, 0, -48, -32, -56, -32 )
